@@ -2,7 +2,7 @@
 //
 
 /*---counting sort---
-資料結構：array；non-inplace sorter*/
+資料結構：array；non-inplace sorter；stable*/
 
 #include "stdafx.h"
 #include <iostream>
