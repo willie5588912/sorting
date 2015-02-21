@@ -7,12 +7,14 @@
 
 void swap(int &a, int &b);
 void sort(int *p_arr, int n);
-
+void checklength(int &a_size, int &b_size, int stage, int idx, int n);
+void compare(int *p_a, int *p_b, int a_size, int b_size, int *p_new_arr, int &new_idx);
+void choose(int *p_comp, int *p_input_arr, int stage, int &idx, int n);
 
 int main()
 {
-	int arr[9] = { 4, 3, 5, 1, 2, 8, 7, 9, 3 };
-	int new_arr[9], input_arr[9];
+	int arr[10] = { 2, 10, 12, 18, 25, 6, 16, 20, 32, 34 };
+	int new_arr[10], input_arr[10];
 	int n = sizeof(arr) / sizeof(int);
 	int idx = 0, stage = 1;
 	int a_size, b_size;
@@ -43,21 +45,8 @@ int main()
 			a = new int[a_size];
 			b = new int[b_size];
 
-			while (round <= pow(2, stage) || idx <= n - 1)
-			{
-				a[round - 1] = input_arr[idx];
-				idx++;
-				round++;
-			}
-			round = 1;
-
-			while (round <= pow(2, stage) || idx <= n - 1)
-			{
-				b[round - 1] = input_arr[idx];
-				idx++;
-				round++;
-			}
-			round = 1;
+			choose(a, input_arr, stage, idx, n);
+			choose(b, input_arr, stage, idx, n);
 
 			compare(a, b, a_size, b_size, new_arr, new_idx);
 
@@ -71,12 +60,33 @@ int main()
 
 
 	/*result*/
+	std::cout << "The sorted array is as following: " << std::endl;
 	for (int i = 0; i < n; i++)
-		std::cout << arr[i] << " ";
+		std::cout << new_arr[i] << " ";
 	std::cout << std::endl;
 
 }
 
+void sort(int *p_arr, int n)
+{
+	int i = 0;
+	while (i < n)
+	{
+		if (i + 1 < n)
+		{
+			if (p_arr[i] > p_arr[i + 1])
+				swap(p_arr[i], p_arr[i + 1]);
+		}
+		i += 2;
+	}
+}
+
+void swap(int &a, int &b)
+{
+	int temp = a;
+	a = b;
+	b = temp;
+}
 
 void checklength(int &a_size, int &b_size, int stage, int idx, int n)
 {
@@ -100,43 +110,56 @@ void checklength(int &a_size, int &b_size, int stage, int idx, int n)
 }
 
 
-void compare(int *p_a, int *p_b, int a_size, int b_size, int *p_new_arr, int new_idx)
+void choose(int *p_comp, int *p_input_arr, int stage, int &idx, int n)
 {
-	int i = 0, j = 0;
+	int round = 1;
+	while (round <= pow(2, stage) && idx <= n - 1)
+	{
+		p_comp[round - 1] = p_input_arr[idx];
+		idx++;
+		round++;
+	}
+	round = 1;
+}
+
+void compare(int *p_a, int *p_b, int a_size, int b_size, int *p_new_arr, int &new_idx)
+{
+	int i = 0, j = 0, k = 0;
 	if (b_size != 0)
 	{
-		while (new_idx < a_size + b_size)
+		while (k < a_size + b_size)
 		{
 			if (i < a_size && j < b_size)
 			{
-				if (p_a[i] <= p_b[j]])
+				if (p_a[i] <= p_b[j])
 				{
-					i++;
 					new_idx++;
 					p_new_arr[new_idx] = p_a[i];
+					i++;
 				}
 				else if (p_a[i]>p_b[j])
 				{
-					j++;
 					new_idx++;
 					p_new_arr[new_idx] = p_b[j];
+					j++;
 				}
 			}
 			else if (i != a_size || j != b_size)
 			{
 				if (i == a_size)
 				{
-					j++;
 					new_idx++;
 					p_new_arr[new_idx] = p_b[j];
+					j++;
 				}
 				else if (j == b_size)
 				{
-					i++;
 					new_idx++;
-					p_new_arr[new_idx] = p_b[i];
+					p_new_arr[new_idx] = p_a[i];
+					i++;
 				}
 			}
+			k++;
 		}
 	}
 	else if (b_size == 0)
@@ -149,24 +172,3 @@ void compare(int *p_a, int *p_b, int a_size, int b_size, int *p_new_arr, int new
 	}
 }
 
-
-void sort(int *p_arr, int n)
-{
-	int i = 0;
-	while (i < n)
-	{
-		if (i + 1 < n)
-		{
-			if (p_arr[i] > p_arr[i + 1])
-				swap(p_arr[i], p_arr[i + 1]);
-		}
-		i += 2;
-	}
-}
-
-void swap(int &a, int &b)
-{
-	int temp = a;
-	a = b;
-	b = temp;
-}
