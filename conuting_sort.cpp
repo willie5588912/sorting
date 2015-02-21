@@ -1,6 +1,8 @@
 // Consolearrpplication1.cpp : 定義主控台應用程式的進入點。
 //
 
+/*---counting sort---
+資料結構：array；non-inplace sorter*/
 
 #include "stdafx.h"
 #include <iostream>
