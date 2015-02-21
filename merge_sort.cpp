@@ -1,6 +1,8 @@
 // Consolearrpplication1.cpp : 定義主控台應用程式的進入點。
 //
 
+/*---merge sort---
+資料結構：array；non-inplace sorter；stable*/
 
 #include "stdafx.h"
 #include <iostream>
@@ -14,14 +16,14 @@ void choose(int *p_comp, int *p_input_arr, int stage, int &idx, int n);
 int main()
 {
 	int arr[10] = { 2, 10, 12, 18, 25, 6, 16, 20, 32, 34 };
-	int new_arr[10], input_arr[10];
+	int new_arr[10], input_arr[10];			/*arr、new_arr、input_arr元素數要相同*/
 	int n = sizeof(arr) / sizeof(int);
 	int idx = 0, stage = 1;
 	int a_size, b_size;
 	int round = 1;
 	int new_idx = -1;
 
-	/*sorting*/
+	/*sorting：將原始資料兩兩一組排序*/
 	sort(arr, n);
 
 	for (int i = 0; i < n; i++)
@@ -29,7 +31,7 @@ int main()
 		new_arr[i] = arr[i];
 	}
 
-	/*merging*/
+	/*merging：開始進行合併*/
 	while (pow(2, stage) < n)
 	{
 		for (int i = 0; i < n; i++)
@@ -38,6 +40,7 @@ int main()
 		}
 		while (idx < n)
 		{
+			/*我們將準備要合併的資料，分別存入a、b，這裡是在確定要分配給a、b的記憶體大小*/
 			checklength(a_size, b_size, stage, idx, n);
 
 			int *a;
@@ -45,9 +48,11 @@ int main()
 			a = new int[a_size];
 			b = new int[b_size];
 
+			/*開始將資料分配給a、b*/
 			choose(a, input_arr, stage, idx, n);
 			choose(b, input_arr, stage, idx, n);
 
+			/*進行a、b的比較，並且合併成新的資料存入new_arr（數值由小到大）*/
 			compare(a, b, a_size, b_size, new_arr, new_idx);
 
 			delete[] a;
@@ -131,7 +136,7 @@ void compare(int *p_a, int *p_b, int a_size, int b_size, int *p_new_arr, int &ne
 		{
 			if (i < a_size && j < b_size)
 			{
-				if (p_a[i] <= p_b[j])
+				if (p_a[i] <= p_b[j])			/*stable特性在於此：不論小於或等於，我們都取前者*/
 				{
 					new_idx++;
 					p_new_arr[new_idx] = p_a[i];
