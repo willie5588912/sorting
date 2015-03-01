@@ -12,7 +12,7 @@ int main()
 	std::list<int> mylist;
 	std::list<int>::iterator it_ins, it_pos;
 
-	int arr[5] = { 5, 1, 2, 8, 4 };
+	int arr[8] = { 15, 8, 20, 7, 66, 54, 18, 26 };
 	int n = sizeof(arr) / sizeof(int);
 	int idx = 0, flag=0;
 
@@ -46,8 +46,9 @@ int main()
 		idx++;
 	}
 
-	for (it_pos = mylist.begin(); it_pos != mylist.end(); ++it_pos)
-		std::cout << ' ' << *it_pos;
+	std::cout << "The sorted series is as following:" << std::endl;
+	for (it_pos = mylist.begin(); it_pos != mylist.end(); it_pos++)
+		std::cout << *it_pos << ' ';
 	std::cout << std::endl;
 
 }
