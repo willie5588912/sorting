@@ -52,7 +52,9 @@ int main()
 		idx++;
 	}
 
+
 	/*result*/
+
 	std::cout << "The sorted series is as following:" << std::endl;
 	for (it_pos = mylist.begin(); it_pos != mylist.end(); it_pos++)
 		std::cout << *it_pos << ' ';
