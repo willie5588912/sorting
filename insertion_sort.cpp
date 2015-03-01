@@ -17,14 +17,20 @@ int main()
 	int n = sizeof(arr) / sizeof(int);
 	int idx = 0, flag=0;
 
+
 	/*initial setting：指標在第一個數值，不需要比較*/
-	for (int i = 0; i < n; i++)		/*把arr的資料寫入list*/
+	
+	/*把arr的資料寫入list*/
+	for (int i = 0; i < n; i++)		
 		mylist.push_back(arr[i]);
 	it_pos = mylist.begin();
 	idx++;
 	it_pos++;
 
+
+
 	/*sorting：從第二個數值開始與前面排好的數列比較*/
+	
 	while (idx < n)
 	{
 		/*尋找正確位置（it_ins）以在他前方插入it_pos的數值*/
