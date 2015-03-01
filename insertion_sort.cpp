@@ -36,7 +36,7 @@ int main()
 		/*尋找正確位置（it_ins）以在他前方插入it_pos的數值*/
 		it_ins = mylist.begin();
 		flag = 0;	/*為了避免it_ins超過it_pos所作的控制（如果超過了會很麻煩，不好寫）*/
-		while (*it_pos >= *it_ins && flag < idx)
+		while (*it_pos >= *it_ins && flag < idx)	/*因為使用>=，所以發現前方有和自己一樣數值時，會往後退一步，形成stable的效果*/
 		{
 			it_ins++;
 			flag++;
