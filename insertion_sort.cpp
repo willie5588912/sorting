@@ -12,7 +12,7 @@ int main()
 	std::list<int> mylist;
 	std::list<int>::iterator it_ins, it_pos;
 
-	int arr[8] = { 15, 8, 20, 7, 66, 54, 18, 26 };
+	int arr[14] = { 15, -8, 20, -7, -7, 0, 0, 66, 66, 54, 18, 18, 15, 26 };
 	int n = sizeof(arr) / sizeof(int);
 	int idx = 0, flag=0;
 
@@ -34,15 +34,8 @@ int main()
 			flag++;
 		}
 		mylist.insert(it_ins, *it_pos);
-		mylist.erase(it_pos);
-
-		/*move it_pos to correct position*/
-		if (idx < n - 1)
-		{
-			it_pos = mylist.begin();
-			advance(it_pos, idx + 1);
-		}
-		
+		it_pos= mylist.erase(it_pos);
+	
 		idx++;
 	}
 
