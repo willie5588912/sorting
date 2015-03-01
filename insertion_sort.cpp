@@ -28,8 +28,11 @@ int main()
 	{
 		it_ins = mylist.begin();
 		flag = 0;
-		while (*it_pos >= *it_ins)
+		while (*it_pos >= *it_ins && flag < idx)
+		{
 			it_ins++;
+			flag++;
+		}
 		mylist.insert(it_ins, *it_pos);
 		mylist.erase(it_pos);
 
