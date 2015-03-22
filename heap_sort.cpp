@@ -14,24 +14,19 @@ void Build_Max_Heap(vector<int>& data);
 int heapSize;
 int main()
 {
-	int arr[10] = { 4, 1, 3, 2, 16, 9, 10, 14, 8, 7 };
+	int arr[11] = { 0, 75, 23, 98, 44, 57, 12, 29, 64, 38, 82};
 	std::vector<int> data(arr, arr + sizeof(arr) / sizeof(int));
 	int n = data.size();
 	heapSize = n;
 
 	Build_Max_Heap(data);
-	for (int i = 0; i < n; i++)
-	{
-		std::cout << data[i] << " ";
-	}
-	std::cout << std::endl;
-
-
+	
 	for (int i = data.size() - 1; i >= 1; i--) {
 		swap(data[0], data[i]);
 		heapSize--;
 		Max_Heapify(data, 0);
 	}
+
 	for (int i = 0; i < n; i++)
 	{
 		std::cout << data[i] << " ";
