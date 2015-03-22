@@ -1,7 +1,7 @@
 // Consolearrpplication1.cpp : 定義主控台應用程式的進入點。
 //
 
-/*merge sort : stable, non-inplace sorter*/
+/*heap sort : unstable, inplace sorter*/
 
 #include "stdafx.h"
 #include <iostream>
@@ -49,7 +49,7 @@ void Build_Max_Heap(vector<int>& data)
 
 void Max_Heapify(std::vector <int>& data, int root)
 {
-	int heapSize = data.size();	//port過去將所有heap_size改成SortTool裡面有的heapSize
+//	int heapSize = data.size();	//port過去將所有heap_size改成SortTool裡面有的heapSize
 	int key_index = root;
 	int largest;
 	if (2 * key_index + 1 > heapSize - 1)
@@ -60,7 +60,7 @@ void Max_Heapify(std::vector <int>& data, int root)
 			swap(data[key_index], data[2 * key_index + 1]);
 		return;
 	}
-	else
+	else if (2 * key_index + 2 <= heapSize - 1)
 	{
 		if (data[key_index] >= data[2 * key_index + 1] && data[key_index] >= data[2 * key_index + 2])
 			return;
